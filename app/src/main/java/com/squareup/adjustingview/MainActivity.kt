@@ -38,25 +38,24 @@ class MainActivity : AppCompatActivity() {
       private const val TAG = "AdjustableView"
 
       fun attach(view: View) {
-        val view = AdjustableView(view.context)
-
-        val p = WindowManager.LayoutParams()
-        p.gravity = Gravity.START or Gravity.TOP
-        p.x = 0
-        p.y = 0
-        p.width = WindowManager.LayoutParams.MATCH_PARENT
-        p.height = WindowManager.LayoutParams.MATCH_PARENT
-        p.alpha = 0f
-        p.format = PixelFormat.TRANSPARENT
-        p.type = WindowManager.LayoutParams.TYPE_APPLICATION_MEDIA
-        p.flags = p.flags or (WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        val adjustableView = AdjustableView(view.context)
+        val params = WindowManager.LayoutParams()
+        params.gravity = Gravity.START or Gravity.TOP
+        params.x = 0
+        params.y = 0
+        params.width = WindowManager.LayoutParams.MATCH_PARENT
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        params.alpha = 0f
+        params.format = PixelFormat.TRANSPARENT
+        params.type = WindowManager.LayoutParams.TYPE_APPLICATION_MEDIA
+        params.flags = params.flags or (WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
             or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
             or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
             or WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR)
-        p.token = view.windowToken
-        p.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
-
-        (view.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).addView(view, p)
+        params.token = view.windowToken
+        params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        (view.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager)
+            .addView(adjustableView, params)
       }
     }
   }
